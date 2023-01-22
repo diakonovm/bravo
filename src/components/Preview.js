@@ -3,24 +3,18 @@ import EditorContext from '../contexts/EditorContext.js'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 
-export const FORMAT = {
-  markdown: 0,
-  html: 1
-}
-
 export default function Preview() {
   const editorContext = useContext(EditorContext)
 
   const [parsedText, setParsedText] = useState(marked.parse(editorContext.unparsedText))
-  const [format, setFormat] = useState(FORMAT.markdown)
+  const [htmlFormat, setHtmlFormat] = useState(false)
 
   useEffect(() => {
     setParsedText(marked.parse(DOMPurify.sanitize(editorContext.unparsedText)))
   }, [editorContext.unparsedText])
 
   const handleSetFormat = () => {
-    console.log('set handle format')
-    setFormat(FORMAT.html)
+    setHtmlFormat((format) => !format)
   }
 
   return (
@@ -41,14 +35,13 @@ export default function Preview() {
           />
         </svg>
       </div>
-      {format === FORMAT.markdown && (
+      {htmlFormat ? (
+        <div className="flex-1 w-full h-full p-4 text-black overflow-y-scroll">{parsedText}</div>
+      ) : (
         <div
           dangerouslySetInnerHTML={{ __html: parsedText }}
-          className="flex-1 w-full h-full p-4 text-black overflow-y-scroll"
+          className="preview-text flex-1 w-full h-full p-4 text-black overflow-y-scroll"
         ></div>
-      )}
-      {format === FORMAT.html && (
-        <div className="flex-1 w-full h-full p-4 text-black overflow-y-scroll">{parsedText}</div>
       )}
     </div>
   )

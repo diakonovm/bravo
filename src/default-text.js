@@ -11,7 +11,11 @@ const text = `[Markdown Guide Basic Syntax](https://www.markdownguide.org/basic-
 | Museum of Fine Arts | Boston, Massachusetts |
 | Museum Ludwig | Cologne, Germany |
 | Art Museum, Florida International University | Miami, Florida |
+<<<<<<< HEAD
 | The Metropolitan Museum of Art | New York, New York |
+=======
+| The Metropolitan Museum of Art | New York, New York    |
+>>>>>>> main
 `
 
 export default text
