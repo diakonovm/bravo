@@ -40,7 +40,9 @@ function App() {
             <Panel minSize={20} className="bg-white">
               <Editor />
             </Panel>
-            <PanelResizeHandle className="w-2.5"></PanelResizeHandle>
+            <PanelResizeHandle className="flex flex-col items-center justify-center px-1">
+              <div class="w-[5px] h-20 rounded-lg bg-white"></div>
+            </PanelResizeHandle>
             <Panel minSize={20} className="bg-white">
               <Preview />
             </Panel>
