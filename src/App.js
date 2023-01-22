@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react'
 import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels'
+import defaultText from './default-text.js'
 import Editor from './components/Editor.js'
 import Preview from './components/Preview.js'
 import EditorContext from './contexts/EditorContext.js'
+
 import styled from '@emotion/styled'
 
 const Logo = styled.div`
@@ -10,7 +12,7 @@ const Logo = styled.div`
 `
 
 function App() {
-  const [unparsedText, setUnparsedText] = useState('')
+  const [unparsedText, setUnparsedText] = useState(defaultText)
 
   const editorContext = useMemo(
     () => ({
