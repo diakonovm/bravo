@@ -36,12 +36,12 @@ export default function Preview() {
         </svg>
       </div>
       {htmlFormat ? (
+        <div className="flex-1 w-full h-full p-4 text-black overflow-y-scroll">{parsedText}</div>
+      ) : (
         <div
           dangerouslySetInnerHTML={{ __html: parsedText }}
-          className="flex-1 w-full h-full p-4 text-black overflow-y-scroll"
+          className="preview-text flex-1 w-full h-full p-4 text-black overflow-y-scroll"
         ></div>
-      ) : (
-        <div className="flex-1 w-full h-full p-4 text-black overflow-y-scroll">{parsedText}</div>
       )}
     </div>
   )
