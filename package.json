@@ -17,6 +17,7 @@
     "react-dom": "^18.2.0",
     "react-resizable-panels": "0.0.35",
     "react-scripts": "5.0.1",
+    "react-use-measure": "^2.1.1",
     "sass": "^1.57.1",
     "web-vitals": "^2.1.4"
   },

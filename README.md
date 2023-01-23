@@ -1,3 +1,7 @@
 # Bravo
 
-Simple React-built markdown editor in the name of the Chilean artist [Claudio Bravo](<https://en.wikipedia.org/wiki/Claudio_Bravo_(painter)>).
+[React-built markdown editor.](https://diakonovm.github.io/bravo/)
+
+## License
+
+The MIT License (MIT).

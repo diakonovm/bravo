@@ -1,17 +1,19 @@
 import { useContext, useEffect, useState } from 'react'
-import EditorContext from '../contexts/EditorContext.js'
+import { EditorContext } from '../contexts/EditorContext.js'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 
 export default function Preview() {
   const editorContext = useContext(EditorContext)
+  const { state } = editorContext
+  const document = state.collection.find((item) => item.id === state.active)
 
-  const [parsedText, setParsedText] = useState(marked.parse(editorContext.unparsedText))
+  const [parsedText, setParsedText] = useState(marked.parse(document.body))
   const [htmlFormat, setHtmlFormat] = useState(false)
 
   useEffect(() => {
-    setParsedText(marked.parse(DOMPurify.sanitize(editorContext.unparsedText)))
-  }, [editorContext.unparsedText])
+    setParsedText(marked.parse(DOMPurify.sanitize(document.body)))
+  }, [document.title, document.body])
 
   const handleSetFormat = () => {
     setHtmlFormat((format) => !format)
@@ -36,7 +38,9 @@ export default function Preview() {
         </svg>
       </div>
       {htmlFormat ? (
-        <div className="flex-1 w-full h-full p-4 text-black overflow-y-scroll">{parsedText}</div>
+        <div className="flex-1 w-full h-full p-4 text-black overflow-y-scroll break-words">
+          <pre>{parsedText}</pre>
+        </div>
       ) : (
         <div
           dangerouslySetInnerHTML={{ __html: parsedText }}

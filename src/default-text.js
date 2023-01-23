@@ -2,7 +2,7 @@ const text = `[Markdown Guide Basic Syntax](https://www.markdownguide.org/basic-
 
 ### Who was Claudio Bravo?
 
-[Claudio Bravo](<https://en.wikipedia.org/wiki/Claudio_Bravo_(painter)>) was a Chilean hyperrealist painter well-known for his paintings of still lifes, portraits, packages and **paper**.
+[Claudio Bravo](https://en.wikipedia.org/wiki/Claudio_Bravo_(painter) was a Chilean hyperrealist painter well-known for his paintings of still lifes, portraits, packages and **paper**.
 
 #### Public Collections
 
@@ -11,11 +11,7 @@ const text = `[Markdown Guide Basic Syntax](https://www.markdownguide.org/basic-
 | Museum of Fine Arts | Boston, Massachusetts |
 | Museum Ludwig | Cologne, Germany |
 | Art Museum, Florida International University | Miami, Florida |
-<<<<<<< HEAD
 | The Metropolitan Museum of Art | New York, New York |
-=======
-| The Metropolitan Museum of Art | New York, New York    |
->>>>>>> main
 `
 
 export default text
