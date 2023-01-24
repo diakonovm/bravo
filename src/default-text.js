@@ -12,6 +12,12 @@ const text = `[Markdown Guide Basic Syntax](https://www.markdownguide.org/basic-
 | Museum Ludwig | Cologne, Germany |
 | Art Museum, Florida International University | Miami, Florida |
 | The Metropolitan Museum of Art | New York, New York |
+
+---
+
+[View source on Github](https://github.com/diakonovm/bravo)
+
+[MIT License](https://github.com/diakonovm/bravo/tree/feat-navigation-menu#license)
 `
 
 export default text
