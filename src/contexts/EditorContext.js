@@ -2,16 +2,19 @@ import { createContext, useEffect, useReducer, useMemo } from 'react'
 import useLocalStorage from '../hooks/useLocalStorage.js'
 import documentReducer from '../reducers/documentReducer.js'
 import DEFAULT_TEXT from '../default-text.js'
+import { v4 as uuidv4 } from 'uuid'
 
+const TEMP_UUID = uuidv4()
+const TEMP_DATE = new Date()
 const DEFAULT_STATE = {
-  active: 0,
+  active: TEMP_UUID,
   collection: [
     {
-      id: 0,
-      title: 'untitled_document',
+      id: TEMP_UUID,
+      title: 'claudio_bravo.md',
       body: DEFAULT_TEXT,
-      createdAt: null,
-      updatedAt: null
+      createdAt: TEMP_DATE.toISOString(),
+      updatedAt: TEMP_DATE.toISOString()
     }
   ]
 }

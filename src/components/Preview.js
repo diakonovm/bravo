@@ -21,8 +21,8 @@ export default function Preview() {
 
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="flex-shrink-0 flex items-center justify-between h-10 px-4 text-xs uppercase font-bold border-b border-primary">
-        <div>Preview</div>
+      <div className="flex-shrink-0 flex items-center justify-between h-10 px-4 text-xs  font-bold border-b border-primary">
+        <div>{document.title}</div>
         <svg
           onClick={handleSetFormat}
           xmlns="http://www.w3.org/2000/svg"

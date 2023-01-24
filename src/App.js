@@ -13,7 +13,7 @@ export default function App() {
   return (
     <EditorProvider>
       <div className="h-screen min-h-0 max-h-screen flex">
-        <Menu className="flex-shrink-0 w-56" />
+        <Menu className="flex-shrink-0 w-56 border-r border-accent" />
         <div className="h-full flex-1 flex flex-col">
           <nav className="flex-shrink-0 flex items-center justify-between py-5 px-4 h-12">
             <Logo className="text-2xl font-bold text-white">Bravo</Logo>
