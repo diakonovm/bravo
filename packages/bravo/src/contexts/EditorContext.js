@@ -1,14 +1,14 @@
 import { createContext, useEffect, useReducer, useMemo } from 'react'
-import useLocalStorage from '../hooks/useLocalStorage.js'
-import documentReducer from '../reducers/documentReducer.js'
-import DEFAULT_TEXT from '../default-text.js'
 import { v4 as uuidv4 } from 'uuid'
+import DEFAULT_TEXT from '../default-text.js'
+import useLocalStorage from '../hooks/useLocalStorage.js'
+import editorReducer from '../reducers/editorReducer.js'
 
 const TEMP_UUID = uuidv4()
 const TEMP_DATE = new Date()
 const DEFAULT_STATE = {
   active: TEMP_UUID,
-  collection: [
+  documents: [
     {
       id: TEMP_UUID,
       title: 'claudio_bravo.md',
@@ -16,19 +16,18 @@ const DEFAULT_STATE = {
       createdAt: TEMP_DATE.toISOString(),
       updatedAt: TEMP_DATE.toISOString()
     }
-  ]
+  ],
+  tabs: [{ id: TEMP_UUID, temp: false }]
 }
 
 export const EditorContext = createContext(undefined)
-
 export const EditorProvider = ({ children }) => {
-  const [documents, setDocuments] = useLocalStorage('documents', DEFAULT_STATE)
-
-  const [state, dispatch] = useReducer(documentReducer, documents)
+  const [documents, setDocuments] = useLocalStorage('editor', DEFAULT_STATE)
+  const [state, dispatch] = useReducer(editorReducer, documents)
 
   useEffect(() => {
     setDocuments(state)
-  }, [state])
+  }, [setDocuments, state])
 
   const value = useMemo(
     () => ({

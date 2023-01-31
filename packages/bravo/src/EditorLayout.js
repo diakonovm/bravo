@@ -1,11 +1,11 @@
+import styled from '@emotion/styled'
 import { useEffect, useRef, useState } from 'react'
 import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels'
 import Editor from './components/Editor.js'
 import FileExplorer from './components/FileExplorer.js'
-import SearchExplorer from './components/SearchExplorer.js'
 import Preview from './components/Preview.js'
 import QuickMenu from './components/QuickMenu.js'
-import styled from '@emotion/styled'
+import SearchExplorer from './components/SearchExplorer.js'
 import { EditorProvider } from './contexts/EditorContext.js'
 
 const Logo = styled.div`
@@ -17,8 +17,7 @@ export default function EditorLayout() {
   const menuRef = useRef(null)
 
   useEffect(() => {
-    const menu = menuRef.current
-    if (menu) menu.expand()
+    if (menuRef.current) menuRef.current.expand()
   }, [menu])
 
   return (

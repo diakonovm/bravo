@@ -1,12 +1,11 @@
+import DOMPurify from 'dompurify'
+import { marked } from 'marked'
 import { useContext, useEffect, useState } from 'react'
 import { EditorContext } from '../contexts/EditorContext.js'
-import { marked } from 'marked'
-import DOMPurify from 'dompurify'
 
 export default function Preview() {
-  const editorContext = useContext(EditorContext)
-  const { state } = editorContext
-  const document = state.collection.find((item) => item.id === state.active)
+  const { state } = useContext(EditorContext)
+  const document = state.documents.find((item) => item.id === state.active)
 
   const [parsedText, setParsedText] = useState(marked.parse(document.body))
   const [htmlFormat, setHtmlFormat] = useState(false)
