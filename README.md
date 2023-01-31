@@ -1,6 +1,6 @@
 # Bravo
 
-[React-built markdown editor.](https://diakonovm.github.io/bravo/)
+[React-built markdown editor.](https://bravo-editor.vercel.app/)
 
 ## License
 
