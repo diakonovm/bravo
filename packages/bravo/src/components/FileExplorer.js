@@ -1,15 +1,14 @@
-import { useContext, useEffect, useRef, useState } from 'react'
-import { EditorContext } from '../contexts/EditorContext.js'
-import { v4 as uuidv4 } from 'uuid'
 import sortBy from 'lodash/sortBy'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
+import { EditorContext } from '../contexts/EditorContext.js'
 
 export default function Menu({ className }) {
-  const editorContext = useContext(EditorContext)
-  const { state, dispatch } = editorContext
+  const { state, dispatch } = useContext(EditorContext)
   const [tempFile, setTempFile] = useState(null)
   const [fileReader] = useState(() => (FileReader ? new FileReader() : null))
   const importRef = useRef(null)
-  const documents = sortBy(state.collection, [
+  const documents = sortBy(state.documents, [
     (i) => {
       return i.title.toLowerCase()
     },
@@ -22,8 +21,8 @@ export default function Menu({ className }) {
       const body = fileReader.result
       const id = uuidv4()
 
-      dispatch({ type: 'IMPORT', payload: { id, title, body } })
-      dispatch({ type: 'SET_ACTIVE', payload: { id } })
+      dispatch({ type: 'IMPORT_DOCUMENT', payload: { id, title, body } })
+      dispatch({ type: 'SET_ACTIVE_TAB', payload: { id } })
 
       setTempFile(null)
     }
@@ -54,19 +53,29 @@ export default function Menu({ className }) {
   }
 
   const handleSetActiveDocument = (document) => {
-    dispatch({ type: 'SET_ACTIVE', payload: { id: document.id } })
+    dispatch({ type: 'SET_ACTIVE_TAB', payload: { id: document.id } })
   }
 
   const handleAddDocument = () => {
     const id = uuidv4()
 
     dispatch({ type: 'ADD_DOCUMENT', payload: { id } })
-    dispatch({ type: 'SET_ACTIVE', payload: { id } })
+    dispatch({ type: 'ADD_TAB', payload: { id } })
+    dispatch({ type: 'SET_ACTIVE_TAB', payload: { id } })
+  }
+
+  const handleAddDocumentToTabs = (document) => {
+    dispatch({ type: 'ADD_TAB', payload: { id: document.id } })
+    dispatch({ type: 'SET_ACTIVE_TAB', payload: { id: document.id } })
+  }
+
+  const handleStickTab = (document) => {
+    dispatch({ type: 'STICK_TAB', payload: { id: document.id } })
   }
 
   return (
-    <div className={`h-full flex flex-col ${className}`}>
-      <div className="flex-1 min-h-0 py-4 overflow-y-scroll">
+    <div className={`h-full flex flex-col min-h-0 ${className}`}>
+      <div className="flex-1 py-4 overflow-y-scroll">
         <div className="flex items-center justify-between px-[18px] mb-2.5">
           <p className="text-xs tracking-wide uppercase font-bold text-accent">Explorer</p>
           <button onClick={handleAddDocument}>
@@ -89,9 +98,10 @@ export default function Menu({ className }) {
         {documents.map((item) => {
           return (
             <button
-              onClick={() => handleSetActiveDocument(item)}
+              onClick={() => handleAddDocumentToTabs(item)}
+              onDoubleClick={() => handleStickTab(item)}
               key={item.id}
-              className={`w-full text-left py-[3px] px-[18px] text-sm truncate cursor-pointer  ${
+              className={`w-full text-left py-[3px] px-[18px] text-sm truncate cursor-pointer transition-all duration-150 ${
                 item.id === state.active
                   ? 'text-oxford-blue-400 bg-oxford-blue-100/10'
                   : 'text-oxford-blue-400 hover:bg-oxford-blue-100/10'
