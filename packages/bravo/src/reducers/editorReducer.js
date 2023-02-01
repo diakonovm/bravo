@@ -22,34 +22,22 @@ export default function Reducer(state, action) {
         ]
       }
     case 'DELETE_DOCUMENT':
-      if (state.documents.length === 1) {
-        const id = uuidv4()
-        return {
-          ...state,
-          active: id,
-          documents: [
-            {
-              id,
-              ...DEFAULT_DOCUMENT
-            }
-          ]
-        }
-      } else {
-        const index = state.documents.findIndex((i) => i.id === action.payload.id)
+      const documentIdx = state.documents.findIndex((i) => i.id === action.payload.id)
+      const tabIdx = state.tabs.findIndex((i) => i.id === action.payload.id)
 
-        const documents = [
-          ...state.documents.slice(0, index),
-          ...state.documents.slice(index + 1, state.documents.length)
-        ]
+      const documents = [
+        ...state.documents.slice(0, documentIdx),
+        ...state.documents.slice(documentIdx + 1, state.documents.length)
+      ]
 
-        return index !== -1
-          ? {
-              ...state,
-              active: documents[0].id,
-              documents
-            }
-          : state
-      }
+      return documentIdx !== -1
+        ? {
+            ...state,
+            active: documents[0] ? documents[0].id : null,
+            documents,
+            tabs: [...state.tabs.slice(0, tabIdx), ...state.tabs.slice(tabIdx + 1, state.tabs.length)]
+          }
+        : state
 
     case 'SET_ACTIVE_TAB':
       return {
