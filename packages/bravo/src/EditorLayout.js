@@ -26,9 +26,9 @@ export default function EditorLayout() {
         <nav className="flex-shrink-0 flex items-center justify-between px-4 h-12">
           <Logo className="text-2xl font-bold text-white">Bravo</Logo>
         </nav>
-        <div className="flex-1 h-full flex">
+        <div className="flex-1 flex h-full min-h-0">
           <QuickMenu menu={menu} setMenu={setMenu} className="flex-shrink-0 w-12 bg-primary border-r border-accent" />
-          <div className="flex-1 w-full h-full">
+          <div className="flex-1">
             <PanelGroup direction="horizontal">
               <Panel ref={menuRef} defaultSize={12} minSize={10} collapsible={true} className="bg-primary">
                 {menu === 'file-explorer' && <FileExplorer className="border-r border-accent bg-primary" />}

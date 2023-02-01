@@ -69,9 +69,13 @@ export default function Menu({ className }) {
     dispatch({ type: 'SET_ACTIVE_TAB', payload: { id: document.id } })
   }
 
+  const handleStickTab = (document) => {
+    dispatch({ type: 'STICK_TAB', payload: { id: document.id } })
+  }
+
   return (
-    <div className={`h-full flex flex-col ${className}`}>
-      <div className="flex-1 min-h-0 py-4 overflow-y-scroll">
+    <div className={`h-full flex flex-col min-h-0 ${className}`}>
+      <div className="flex-1 py-4 overflow-y-scroll">
         <div className="flex items-center justify-between px-[18px] mb-2.5">
           <p className="text-xs tracking-wide uppercase font-bold text-accent">Explorer</p>
           <button onClick={handleAddDocument}>
@@ -95,6 +99,7 @@ export default function Menu({ className }) {
           return (
             <button
               onClick={() => handleAddDocumentToTabs(item)}
+              onDoubleClick={() => handleStickTab(item)}
               key={item.id}
               className={`w-full text-left py-[3px] px-[18px] text-sm truncate cursor-pointer transition-all duration-150 ${
                 item.id === state.active

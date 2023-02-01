@@ -61,13 +61,11 @@ export default function Reducer(state, action) {
 
       if (idx === -1) return state
 
-      const tab = state.tabs[idx]
-
-      tab.temp = false
+      const tab = Object.assign(state.tabs[idx], { temp: false })
 
       return {
         ...state,
-        tabs: [...state.tabs.slice(0, idx), tab, ...state.tabs.slice(idx + 1, state.tabs.length - 1)]
+        tabs: [...state.tabs.slice(0, idx), tab, ...state.tabs.slice(idx + 1, state.tabs.length)]
       }
     case 'ADD_TAB':
       if (state.tabs.find((tab) => tab.id === action.payload.id)) return state
