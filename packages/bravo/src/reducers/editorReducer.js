@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
-
 const TEMP_DATE = new Date()
 const DEFAULT_DOCUMENT = {
   title: 'untitled.md',
@@ -107,7 +105,8 @@ export default function Reducer(state, action) {
               return item.id === action.payload.id
                 ? {
                     ...item,
-                    title: action.payload.title
+                    title: action.payload.title,
+                    updatedAt: new Date().toISOString()
                   }
                 : item
             })
@@ -121,7 +120,8 @@ export default function Reducer(state, action) {
               return item.id === action.payload.id
                 ? {
                     ...item,
-                    body: action.payload.body
+                    body: action.payload.body,
+                    updatedAt: new Date().toISOString()
                   }
                 : item
             })

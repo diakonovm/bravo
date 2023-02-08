@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels'
 import Editor from './components/Editor.js'
 import FileExplorer from './components/FileExplorer.js'
@@ -7,6 +7,7 @@ import Preview from './components/Preview.js'
 import QuickMenu from './components/QuickMenu.js'
 import SearchExplorer from './components/SearchExplorer.js'
 import { EditorProvider } from './contexts/EditorContext.js'
+import EditorMetaData from './components/EditorMetaData.js'
 
 const Logo = styled.div`
   font-family: 'Courgette';
@@ -19,13 +20,13 @@ export default function EditorLayout() {
   const [menu, setMenu] = useState('file-explorer')
   const menuRef = useRef(null)
 
-  const handleSetLayout = (layout) => {
-    setLayout(layout)
-  }
-
   useEffect(() => {
     if (menuRef.current) menuRef.current.expand()
   }, [menu])
+
+  const handleSetLayout = (layout) => {
+    setLayout(layout)
+  }
 
   return (
     <EditorProvider>
@@ -67,7 +68,7 @@ export default function EditorLayout() {
             </button>
           </div>
         </nav>
-        <div className="flex-1 flex h-full min-h-0">
+        <main className="flex-1 flex h-full min-h-0">
           <QuickMenu menu={menu} setMenu={setMenu} className="flex-shrink-0 w-12 bg-primary border-r border-accent" />
           <div className="flex-1">
             <PanelGroup direction="horizontal">
@@ -103,7 +104,8 @@ export default function EditorLayout() {
               </Panel>
             </PanelGroup>
           </div>
-        </div>
+        </main>
+        <EditorMetaData className="flex-shrink-0 flex items-center justify-end h-7 px-4 text-xs text-white bg-primary" />
       </div>
     </EditorProvider>
   )

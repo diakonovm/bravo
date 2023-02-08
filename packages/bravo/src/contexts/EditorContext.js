@@ -27,7 +27,7 @@ export const EditorProvider = ({ children }) => {
 
   useEffect(() => {
     setDocuments(state)
-  }, [setDocuments, state])
+  }, [state])
 
   const value = useMemo(
     () => ({
