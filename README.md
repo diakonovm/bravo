@@ -1,6 +1,6 @@
 # Bravo Markdown Editor
 
-[React-built markdown editor.](https://bravo-markdown-editor.vercel.app/)
+[React-built markdown editor.](https://bravo-markdown.com/)
 
 ## License
 
